@@ -34,15 +34,29 @@ class CalendarView : View() {
 
                 listview(items)
 
-                val datePicker = DatePicker(LocalDate.now())
-                val datePickerSkin = DatePickerSkin(datePicker)
-                add(datePickerSkin.popupContent)
+                vbox(spacing = 10, alignment = Pos.TOP_CENTER) {
+                    val datePicker = DatePicker(LocalDate.now())
+                    val datePickerSkin = DatePickerSkin(datePicker)
+                    add(datePickerSkin.popupContent)
 
-                datePicker.valueProperty().addListener { _, _, day ->
-                    items.setAll(calendar.getItemsForDay(day))
+                    datePicker.valueProperty().addListener { _, _, day ->
+                        items.setAll(calendar.getItemsForDay(day))
+                    }
+
+                    button("Add Item") {
+                        action {
+                            openInternalWindow(AddItemFragment::class)
+                        }
+                    }
                 }
             }
         }
+    }
+}
+
+class AddItemFragment : Fragment("Add Item") {
+    override val root = vbox {
+
     }
 }
 
