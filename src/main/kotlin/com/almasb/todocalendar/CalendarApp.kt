@@ -1,17 +1,13 @@
 package com.almasb.todocalendar
 
+import com.sun.javafx.scene.control.skin.DatePickerSkin
 import javafx.application.Application
 import javafx.collections.FXCollections
+import javafx.geometry.Pos
 import javafx.scene.Parent
+import javafx.scene.control.DatePicker
 import tornadofx.*
 import java.time.LocalDate
-import javafx.scene.control.DatePicker
-import com.sun.javafx.scene.control.skin.DatePickerSkin
-import javafx.beans.binding.Bindings
-import javafx.geometry.Pos
-import javafx.scene.Scene
-import javafx.scene.layout.BorderPane
-import java.util.concurrent.Callable
 
 
 /**
