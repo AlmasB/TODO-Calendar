@@ -7,10 +7,11 @@ import tornadofx.*
 import java.time.LocalDate
 import javafx.scene.control.DatePicker
 import com.sun.javafx.scene.control.skin.DatePickerSkin
+import javafx.beans.binding.Bindings
 import javafx.geometry.Pos
 import javafx.scene.Scene
 import javafx.scene.layout.BorderPane
-
+import java.util.concurrent.Callable
 
 
 /**
@@ -21,16 +22,25 @@ import javafx.scene.layout.BorderPane
 class CalendarApp : App(CalendarView::class)
 
 class CalendarView : View() {
+
+    private val calendar by inject<Calendar>()
+    private val items = FXCollections.observableArrayList<TODOItem>()
+
     override val root: Parent = borderpane {
 
         center {
             hbox {
                 paddingAll = 15
 
-                listview(FXCollections.observableArrayList<String>())
+                listview(items)
 
-                val datePickerSkin = DatePickerSkin(DatePicker(LocalDate.now()))
+                val datePicker = DatePicker(LocalDate.now())
+                val datePickerSkin = DatePickerSkin(datePicker)
                 add(datePickerSkin.popupContent)
+
+                datePicker.valueProperty().addListener { _, _, day ->
+                    items.setAll(calendar.getItemsForDay(day))
+                }
             }
         }
     }
