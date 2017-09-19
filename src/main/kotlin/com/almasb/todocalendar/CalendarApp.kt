@@ -29,7 +29,7 @@ class CalendarView : View() {
     override val root: Parent = borderpane {
 
         center {
-            hbox {
+            hbox(spacing = 10) {
                 paddingAll = 15
 
                 listview(items)
@@ -45,7 +45,7 @@ class CalendarView : View() {
 
                     button("Add Item") {
                         action {
-                            openInternalWindow(AddItemFragment::class)
+                            openInternalWindow(AddItemFragment::class, params = mapOf(AddItemFragment::day to datePicker.value))
                         }
                     }
                 }
@@ -55,8 +55,28 @@ class CalendarView : View() {
 }
 
 class AddItemFragment : Fragment("Add Item") {
-    override val root = vbox {
+    private val calendar by inject<Calendar>()
 
+    val day: LocalDate by param()
+
+    private val fieldName = textfield()
+    private val fieldDesc = textfield()
+
+    override val root = vbox {
+        paddingAll = 5
+
+        text("Item Name")
+        add(fieldName)
+
+        text("Item Desc")
+        add(fieldDesc)
+
+        button("OK") {
+            action {
+                calendar.addTODOItem(day, TODOItem(fieldName.text, fieldDesc.text))
+                close()
+            }
+        }
     }
 }
 
