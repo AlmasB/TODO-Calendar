@@ -2,6 +2,7 @@ package com.almasb.todocalendar
 
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
@@ -12,9 +13,15 @@ import java.time.LocalDate
  */
 class CalendarTest {
 
+    private lateinit var calendar: Calendar
+
+    @BeforeEach
+    fun `init`() {
+        calendar = Calendar()
+    }
+
     @Test
     fun `Assign a TODO item to a day`() {
-        val calendar = Calendar()
         val item = TODOItem()
 
         val day = LocalDate.now()
@@ -25,7 +32,6 @@ class CalendarTest {
 
     @Test
     fun `Remove a TODO item from a day`() {
-        val calendar = Calendar()
         val item = TODOItem()
 
         val day = LocalDate.now()
