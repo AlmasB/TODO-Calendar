@@ -3,6 +3,7 @@ package com.almasb.todocalendar
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.*
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 /**
  *
@@ -16,7 +17,9 @@ class CalendarTest {
         val calendar = Calendar()
         val item = TODOItem()
 
-        calendar.addTODOItem(item)
-        assertThat(calendar.items, hasItem(item))
+        val day = LocalDate.now()
+
+        calendar.addTODOItem(day, item)
+        assertThat(calendar.getItemsForDay(day), hasItem(item))
     }
 }
