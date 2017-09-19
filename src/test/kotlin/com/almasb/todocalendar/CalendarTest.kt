@@ -22,7 +22,7 @@ class CalendarTest {
 
     @Test
     fun `Assign a TODO item to a day`() {
-        val item = TODOItem()
+        val item = TODOItem("test", "test")
 
         val day = LocalDate.now()
 
@@ -32,7 +32,7 @@ class CalendarTest {
 
     @Test
     fun `Remove a TODO item from a day`() {
-        val item = TODOItem()
+        val item = TODOItem("test", "test")
 
         val day = LocalDate.now()
 
