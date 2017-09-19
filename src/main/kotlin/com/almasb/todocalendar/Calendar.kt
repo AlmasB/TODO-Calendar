@@ -21,4 +21,8 @@ class Calendar {
     fun getItemsForDay(day: LocalDate): List<TODOItem> {
         return data[day] ?: emptyList()
     }
+
+    fun removeTODOItem(day: LocalDate, item: TODOItem) {
+        data[day]?.remove(item)
+    }
 }

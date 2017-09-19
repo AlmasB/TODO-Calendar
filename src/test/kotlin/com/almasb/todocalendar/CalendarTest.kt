@@ -22,4 +22,17 @@ class CalendarTest {
         calendar.addTODOItem(day, item)
         assertThat(calendar.getItemsForDay(day), hasItem(item))
     }
+
+    @Test
+    fun `Remove a TODO item from a day`() {
+        val calendar = Calendar()
+        val item = TODOItem()
+
+        val day = LocalDate.now()
+
+        calendar.addTODOItem(day, item)
+        calendar.removeTODOItem(day, item)
+
+        assertThat(calendar.getItemsForDay(day), not(hasItem(item)))
+    }
 }
